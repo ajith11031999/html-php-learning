@@ -1,0 +1,22 @@
+what is the purpose of git?
+ 1)git is a version control system. 
+ 2)we can initialize,add and commit a program  to a repository 
+ 3)It tracks the changes we make to files, so we have a record of what has been done
+ 4)we can revert to specific versions of the code. 
+ 5)It also makes collaboration easier, allowing changes by multiple people to all be merged into one source. 
+
+
+difference between git and github ?
+
+git :
+It is a software . It is a command-line tool and installed locally on the system . It is maintained by linux . It is focused on version control and code sharing .It is a version control system to manage source code history and has no user management feature
+
+github:
+It is a service . It is a graphical user interface and hosted on the web . It is maintained by microsoft . It is focused on centralized source code hosting. It is a hosting service for Git repositories and has built-in user management feature.
+
+
+
+
+
+
+

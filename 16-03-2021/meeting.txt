@@ -18,4 +18,13 @@ purpose of using github  ?
 
  1)we can upload the files  
  2)we can edit or delete the uploaded file based on the permission and commit it 
- 3)we can view the history of commit of a particular file
+ 3)we can view the history of commit of a particular file\
+ 
+
+purpose of using github  ?
+
+ 1)The main purpose of GitHub is version control of your code.
+ 2)we can commit a program  to a repository 
+ 3)if we want to improvise the code we can select edit if we have the permission after completion we should commit again .
+ 4)we can view the history of commit of that program file, from which we can understand the development and flow of the code . 
+ 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+
+p.class{
+ color :blue;
+ }
+ 
+
+#id{
+ color : yellow;
+ }
+ 
+
+ p.class2{
+ color :blue;
+ }
+ 
+
+#one{
+ color : brown;
+ }
+ 
+p{
+ color : green
+} 
+  
+</style>
+</head>
+<body>
+
+<p class = "class"> class </p>  <!-- change the color to blue -->
+
+
+<p id = "id"> id </p>  <!-- change the color to yellow -->
+
+<p style="color:pink" class = "class2" > class with inline style</p> <!-- does not change the color to blue , due to inline style color will change to pink since specificity of inline css – 1000 . but p.class2 specificity value is 1+10 = 11 -->  
+
+
+<p style="color:red" id = "one" > id with inline style</p>
+ <!-- does not change the color to brown , due to inline style color will change to red  since specificity of inline css – 1000 , but #one specificity value is 100 --> 
+ 
+ 
+ <p> tag </p>  <!-- change the color to green but not to all p tags since its specificity value is 1 --> 
+
+</body>
+</html>
+

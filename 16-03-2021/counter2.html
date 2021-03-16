@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  counter-reset: section;
+}
+
+h1 {
+  counter-reset: subsection;
+}
+
+h1::before {
+  counter-increment: section;
+  content: "Section " counter(section) ". ";
+}
+
+h2::before {
+  counter-increment: subsection;
+  content: counter(section) "." counter(subsection) " ";
+}
+</style>
+</head>
+<body>
+
+
+<h1>Language:</h1>
+<h2>Tamil</h2>
+<h2>English</h2>
+<h2>French</h2>
+
+<h1>Science:</h1>
+<h2>Botany</h2>
+<h2>Zoology</h2>
+<h2>Chemistry</h2>
+<h2>Physics</h2>
+
+</body>
+</html>
+

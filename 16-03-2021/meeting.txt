@@ -1,0 +1,21 @@
+#div - selctor of id div
+selctors
+. for class
+# for id
+
+
+
+class , id and tag?
+
+styles are applied based on the specificity values
+specificity of tag - 1
+specificity of class - 10
+specificity of id - 100
+specificity of inline css - 1000
+
+
+purpose of using github  ?
+
+ 1)we can upload the files  
+ 2)we can edit or delete the uploaded file based on the permission and commit it 
+ 3)we can view the history of commit of a particular file

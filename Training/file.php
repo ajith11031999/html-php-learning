@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-<body>
-
 <?php
-$myfile = fopen("open.txt", "w");
+//fwrite
+$myfile = fopen("open.txt", "w") or die("Unable to open file!");
+$txt = "Hello World!\n";
+fwrite($myfile, $txt);
+$txt = "Good Day!\n";
+fwrite($myfile, $txt);
+fclose($myfile);
 ?>
-
-</body>
-</html>

@@ -1,24 +1,13 @@
-<!DOCTYPE html>
 <?php
+// display all cookies
+foreach ($_COOKIE as $key=>$val)
+  {
+    echo $key.' is '.$val."<br>\n";
+  }
 
-$cookie_name = "user";
-$cookie_value = "rain";
-setcookie($cookie_name, $cookie_value, time() + (20), "/");
-?>
-<html>
-<body>
-
-<?php
-if(!isset($_COOKIE[$cookie_name])) {
-     echo "Cookie named '" . $cookie_name . "' is not set!";
+if(count($_COOKIE) > 0) {
+  echo "Cookies are enabled.";
 } else {
-     echo "Cookie '" . $cookie_name . "' is set!<br>";
-    
-     echo "Value is: " . $_COOKIE[$cookie_name];
+  echo "Cookies are disabled.";
 }
 ?>
-
-<p>Reload the page to see the value of the cookie.</p>
-
-</body>
-</html>

@@ -1,13 +1,13 @@
 <?php
-// display all cookies
-foreach ($_COOKIE as $key=>$val)
-  {
-    echo $key.' is '.$val."<br>\n";
-  }
-
-if(count($_COOKIE) > 0) {
-  echo "Cookies are enabled.";
-} else {
-  echo "Cookies are disabled.";
-}
+// Deleting a cookie
+setcookie("user", "", time() - 3600);
 ?>
+<html>
+<body>
+
+<?php
+echo "Cookie 'user' is deleted.";
+?>
+
+</body>
+</html>

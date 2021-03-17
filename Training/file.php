@@ -1,5 +1,4 @@
 <?php
-// Start the session
 session_start();
 ?>
 <!DOCTYPE html>
@@ -7,10 +6,9 @@ session_start();
 <body>
 
 <?php
-// Setting session variables
-$_SESSION["name"] = "Ajith";
-$_SESSION["email"] = "ajith@gmail.com";
-echo "Session variables are set.";
+// get session variables 
+echo "My name is " . $_SESSION["name"] . ".<br>";
+echo "My emailid is " . $_SESSION["email"] . ".";
 ?>
 
 </body>

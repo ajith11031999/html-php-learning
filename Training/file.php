@@ -3,7 +3,9 @@
 <body>
 
 <?php
-echo readfile("meeting.txt");
+$myfile = fopen("meeting.txt", "r") or die("Unable to open file!");
+echo fgets($myfile);
+fclose($myfile);
 ?>
 
 </body>

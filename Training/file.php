@@ -1,12 +1,16 @@
 <?php
-// Deleting a cookie
-setcookie("user", "", time() - 3600);
+// Start the session
+session_start();
 ?>
+<!DOCTYPE html>
 <html>
 <body>
 
 <?php
-echo "Cookie 'user' is deleted.";
+// Setting session variables
+$_SESSION["name"] = "Ajith";
+$_SESSION["email"] = "ajith@gmail.com";
+echo "Session variables are set.";
 ?>
 
 </body>

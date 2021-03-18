@@ -1,0 +1,22 @@
+JOINS IN MYSQL
+
+1)INNER JOIN
+
+select test1.firstname,test2.firstname from test1 inner join test2 on test1.age = test2.age;
+
+2)LEFT JOIN
+
+select test1.firstname,test2.firstname from test1 left join test2 on test1.age = test2.age;
+
+
+3)RIGHT JOIN
+
+select test1.firstname,test2.firstname FROM test1 left join test2 on test1.age = test2.age;
+
+
+4)FULL OUTER JOIN
+
+select test1.firstname,test2.firstname from test1 full outer join test2 on test1.age = test2.age;
+
+
+

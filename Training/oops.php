@@ -1,21 +1,3 @@
-auto.php
-
-<?php
-spl_autoload_register(function ($class_name) {
-   $file_name = $class_name . '.php';
-
-	if( file_exists( $file_name ) ) {
-	 
-		require $file_name;
-	}	
-});
-$obj = new config();
-$conn = $obj->Connect();
-
-?>
-
-class.php 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +19,7 @@ class.php
 include "auto.php";
 class Database{
 
-    function Insert($conn,$firstname,$lastname,$email,$phno){  
+    public function Insert($conn,$firstname,$lastname,$email,$phno){  
        echo $firstname;
 
       $sql = "INSERT INTO users (firstname,lastname,email,phno) VALUES ('$firstname', '$lastname', '$email', '$phno')";   
@@ -48,7 +30,7 @@ class Database{
         }
     }
 
-    function Empty($firstname, $lastname,$email,$phno){
+    public function Empty($firstname, $lastname,$email,$phno){
     if($firstname == ""){
       $firstnameErr = "* first name is not entered";
     }
@@ -84,7 +66,7 @@ class Database{
 }    
  class Edit extends Database
  {      
-    function Edit($conn){     
+    public function Empty($conn,$lastname,$email,$phno){     
       $records = mysqli_query($conn,"select * from users"); // fetch data from database
       ?><h3>Displaying all records from Database</h3>
         <h4>Incase of any change click the edit option</h4>
@@ -106,7 +88,7 @@ class Database{
 }  
 
 
-$insert = new Edit();
+$insert = new Database();
 if(isset($_POST['submit'])){
  $firstname = $_POST['firstname'];
  $lastname = $_POST['lastname'];
@@ -118,7 +100,8 @@ if(isset($_POST['submit'])){
    else{
      $insert->Insert($conn,$firstname,$lastname,$email,$phno);
    }  
-$insert->Edit($conn);
+$inser = new Edit();   
+$inser->Empty($conn,$lastname,$email,$phno);
 }
 
 

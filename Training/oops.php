@@ -1,113 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Display all records from Database</title>
-</head>
-<body>
+<?php 
 
-<table border="2">
-  <tr>
-    <td>lS.No.</td>
-    <td>First Name</td>
-    <td>Last name</td>
-    <td>Email</td>
-    <td>Phno</td>
-    <td>Edit</td>
-  </tr>
-<?php
-
-include "auto.php";
-class Database{
-
-    public function Insert($conn,$firstname,$lastname,$email,$phno){  
-       echo $firstname;
-
-      $sql = "INSERT INTO users (firstname,lastname,email,phno) VALUES ('$firstname', '$lastname', '$email', '$phno')";   
-       echo "inserted successfully into the table<br>";    
-
-        if(mysqli_query($conn, $sql)){
-         echo "inserted into the table<br>";
-        }
-    }
-
-    public function Empty($firstname, $lastname,$email,$phno){
-    if($firstname == ""){
-      $firstnameErr = "* first name is not entered";
-    }
-    if($lastname == ""){
-      $lastnameErr="* last name is not entered";
-    }
-    if($email == ""){
-      $emailErr="* email is not entered";
-    }
-    if($phno == ""){
-      $phnoErr="* phno  is not entered";
-    }
-    ?> 
-      <h3>kindly enter the details in all fields as required </h3>
-      <form action="class.php" method="post">
-      First name: <input type="text" name="firstname" value="<?php echo $firstname ?>" >
-      <span class="error"> <?php echo $firstnameErr;?></span>
-      <br><br>
-      Last name: <input type="text" name="lastname" value="<?php echo $lastname ?>">
-      <span class="error"> <?php echo $lastnameErr;?></span>
-      <br><br>
-      E-mail: <input type="text" name="email" value="<?php echo $email ?>">
-      <span class="error"> <?php echo $emailErr;?></span>
-      <br><br>
-      Phno: <input type="text" name="phno" value="<?php echo $phno ?>">
-      <span class="error"> <?php echo $phnoErr;?></span>
-      <br><br>
-      <input type="submit" name ="submit" value="Submit"><br><br>
-      </form>
-    <?php
-
-    }
-}    
- class Edit extends Database
- {      
-    public function Empty($conn,$lastname,$email,$phno){     
-      $records = mysqli_query($conn,"select * from users"); // fetch data from database
-      ?><h3>Displaying all records from Database</h3>
-        <h4>Incase of any change click the edit option</h4>
-      <?php
-      while($data = mysqli_fetch_array($records)){
-      ?>
-         <tr>
-         <td><?php echo $data['id']; ?></td>
-         <td><?php echo $data['firstname']; ?></td>
-         <td><?php echo $data['lastname']; ?></td> 
-         <td><?php echo $data['email']; ?></td> 
-         <td><?php echo $data['phno']; ?></td>
-         <td><a href="update.php?id=<?php echo $data['id']; ?>">Edit</a></td>   
-         </tr>	
-
-      <?php
-       }
-    }
-}  
-
-
-$insert = new Database();
-if(isset($_POST['submit'])){
- $firstname = $_POST['firstname'];
- $lastname = $_POST['lastname'];
- $email = $_POST['email'];
- $phno = $_POST['phno'];
-   if($firstname == "" or $lastname =="" or $email == "" or $phno ==""){
-     $insert->Empty($firstname, $lastname,$email,$phno);
-   }
-   else{
-     $insert->Insert($conn,$firstname,$lastname,$email,$phno);
-   }  
-$inser = new Edit();   
-$inser->Empty($conn,$lastname,$email,$phno);
-}
-
-
+class calc { 
+      
+  function __call($name_of_function, $arguments) { 
+              
+     if($name_of_function == 'ans') { 
+              
+        switch (count($arguments)) { 
+                      
+          // If there is only one argument 
+          case "1": 
+            echo " single argument : ";     
+            return  $arguments[0]; 
+                          
+          // IF two arguments then; 
+          case "2": 
+             echo " two arguments : " ;
+             return $arguments[0]*$arguments[1];
+              
+        } 
+     } 
+  } 
+} 
+      
+ 
+$ans = new calc;  
+echo($ans->ans(2)); 
+echo "<br>"; 
+       
+echo ($ans->ans(4, 2)); 
 ?> 
-
-</table>
-
-</body>
-</html>

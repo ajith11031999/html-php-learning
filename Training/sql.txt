@@ -38,6 +38,32 @@ SELECT count(*) AS No_OF_COLUMNS FROM information_schema.columns WHERE table_nam
 select * from test1 order by age desc;
 
 
+9)create unique index
+
+create unique index id_age ON test1 (age);
+
+
+10)create index
+
+create index id_lastname ON test1 (lastname);
+
+
+11)drop a index
+
+alter table test1 drop index id_age;
+
+
+12)add a unique constraint
+
+alter table test2 add unique (age);
+
+
+13)drop a unique constraint
+
+alter table test2 drop index age;
+
+
+
 
 
 

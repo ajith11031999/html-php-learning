@@ -19,4 +19,28 @@ select test1.firstname,test2.firstname FROM test1 left join test2 on test1.age =
 select test1.firstname,test2.firstname from test1 full outer join test2 on test1.age = test2.age;
 
 
+5)sum
+
+SELECT SUM(age) AS "Total age" FROM test1;
+
+
+6)average
+
+SELECT AVG(age) AS "Average age" FROM test1;
+
+7)count columns
+
+SELECT count(*) AS No_OF_COLUMNS FROM information_schema.columns WHERE table_name ='test1';
+
+
+8)sorting
+
+select * from test1 order by age desc;
+
+
+
+
+
+
+
 

@@ -1,15 +1,15 @@
-<?php 
-  
-// If file is not present  
-if( !file_exists("ajith.txt") ) { 
-    die("File is not present"); 
-} 
-  
-// If file is present 
-else { 
-    $file = fopen("ajith.txt", "w"); 
-} 
-?> 
+<?php
+//error handler function
 
+function customError($errno, $errstr) {
+  echo "<br>Error:</br> [$errno] $errstr";
+}
 
+//set error handler
+set_error_handler("customError");
 
+//trigger error
+echo($one);
+echo($two);
+echo($three);
+?>

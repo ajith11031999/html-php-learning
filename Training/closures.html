@@ -2,22 +2,24 @@
 <html>
 <body>
 
-<p>Scopes:</p>
+<h2>JavaScript Closures</h2>
 
-<button type="button" onclick="myFunction()">solution!</button>
+<p>Counting with a local variable.</p>
 
-<p id="demo"></p>
+<button type="button" onclick="myFunction()">Count!</button>
+
+<p id="demo">0</p>
 
 <script>
-var a = 7; //global variable
-function myFunction() {
-  var a = 5;  //local variable
-  document.getElementById("demo").innerHTML = a * a; //gives 25
-} 
-document.getElementById("demo").innerHTML = a * a; //give 49
+var add = (function () {
+  var counter = 0;
+  return function () {counter += 1; return counter;}
+})();
+
+function myFunction(){
+  document.getElementById("demo").innerHTML = add();
+}
 </script>
-
-
 
 </body>
 </html>

@@ -2,19 +2,20 @@
 <html>
 <body>
 
-<h2>The JavaScript String() Method</h2>
+<p>Tostring.</p>
 
-<p>The String() convert to a string.</p>
+<button onclick="myFunction()">solution</button>
 
 <p id="demo"></p>
 
 <script>
-var x = 15;
-document.getElementById("demo").innerHTML =
-  String(x) + "<br>" +
-  String(14) + "<br>" +
-  String(x + 14);
+function myFunction() {
+  var num = 15;
+  var n = num.toString();
+  var sum = n + 1; //does not give the sum since n is a string now
+  document.getElementById("demo").innerHTML = sum;
+}
 </script>
+
 </body>
 </html>
-

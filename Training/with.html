@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2> with operator</h2>
+
+<p id="demo"></p>
+
+<script>
+var a, x, y;
+var r = 10;
+
+with (Math) {
+  a = PI * r * r;
+  x = r * cos(PI);
+  y = r * sin(PI / 2);
+}
+
+document.getElementById("demo").innerHTML =
+a + "<br>" +
+x + "<br>" +
+y + "<br>";
+</script>
+
+</body>
+</html>

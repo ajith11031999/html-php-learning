@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Scopes:</p>
+
+<button type="button" onclick="myFunction()">solution!</button>
+
+<p id="demo"></p>
+
+<script>
+var a = 7; //global variable
+function myFunction() {
+  var a = 5;  //local variable
+  document.getElementById("demo").innerHTML = a * a; //gives 25
+} 
+document.getElementById("demo").innerHTML = a * a; //give 49
+</script>
+
+
+
+</body>
+</html>

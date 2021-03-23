@@ -2,18 +2,17 @@
 <html>
 <body>
 
-<p>Tostring.</p>
+<p>valueOf- display the value.</p>
 
-<button onclick="myFunction()">solution</button>
+<button onclick="myFunction()">Try it</button>
 
 <p id="demo"></p>
 
 <script>
 function myFunction() {
-  var num = 15;
-  var n = num.toString();
-  var sum = n + 1; //does not give the sum since n is a string now
-  document.getElementById("demo").innerHTML = sum;
+  var num = 10 + 10 +100;
+  var n = num.valueOf()
+  document.getElementById("demo").innerHTML = n;
 }
 </script>
 

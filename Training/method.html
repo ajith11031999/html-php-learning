@@ -2,22 +2,24 @@
 <html>
 <body>
 
-<p>Creating and using an object method.</p>
+<h2>JavaScript Class Static Methods</h2>
 
 <p id="demo"></p>
 
 <script>
-var person = {
-  firstName: "Ajith",
-  lastName : "Xavier",
-  fullName : function() {
-    return this.firstName + " " + this.lastName;
+class Name {
+  constructor(fname) {
+    this.firstname = fname;
   }
-};
+  static hello(xavier) {
+    return "Hello " + xavier.firstname;
+  }
+}
 
-document.getElementById("demo").innerHTML = "My name is "+ person.fullName();
+myname = new Name("Ajith");
+document.getElementById("demo").innerHTML = Name.hello(myname);
+  
 </script>
 
 </body>
 </html>
-

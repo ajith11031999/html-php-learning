@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-<!-- Dom nodes -->
+
 <div id="div1">
 <p id="p1">This is a paragraph.</p>
 <p id="p2">This is another paragraph.</p>
@@ -11,8 +11,10 @@
 var para = document.createElement("p");
 var node = document.createTextNode("This is newly added.");
 para.appendChild(node);
+
 var element = document.getElementById("div1");
-element.appendChild(para);
+var child = document.getElementById("p1");
+element.insertBefore(para,child);
 </script>
 
 </body>

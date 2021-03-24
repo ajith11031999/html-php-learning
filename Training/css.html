@@ -1,19 +1,22 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-img {
-  max-width: 100%;
-  height: auto;
+body {
+  background-color: blue;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: red;
+  }
 }
 </style>
 </head>
 <body>
 
-<img src="/home/ajith/Downloads/land.jpeg" width="600px" height="400px">
-<p>Resize the browser window ,the image will scale when the width is less than 600px.</p>
+<p>Resize the browser window. When the width of this document is 600 pixels or less, the background-color is "red", otherwise it is "blue".</p>
 
 </body>
 </html>

@@ -3,16 +3,26 @@
 <body>
 <h1>Timers </h1>
 <h2>setTimeout method </h2>
-<p> Alert</p>
-
-<button onclick="myFunction()">Alert in 3 seconds</button>
+<p>Controlled time</p>
+<p id="demo"></p>
+<button onclick="startFunction()">Start Time</button>
+<button onclick="stopFunction()">Pause time</button>
 
 <script>
-function myFunction() {
-  setTimeout(function(){ alert("TIME UP"); }, 3000);
+var myVar;
+function startFunction(){
+ myVar = setInterval(myTimer, 1000);
+}
+function myTimer() {
+  var d = new Date();
+  var t = d.toLocaleTimeString();
+  document.getElementById("demo").innerHTML = t;
+}
+
+function stopFunction() {
+  clearInterval(myVar);
 }
 </script>
 
 </body>
 </html>
-

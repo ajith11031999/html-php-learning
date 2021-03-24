@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Popup window</h2>
+
+<button onclick="popup()">Popup</button>
+
+
+<script>
+function popup() {
+ var newWindow = window.open("about:blank", "hello", "width=200,height=200");
+
+newWindow.document.write("Hello, world!");
+}
+</script>
+
+</body>
+</html>

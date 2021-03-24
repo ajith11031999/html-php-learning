@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>browser events</h2>
+
+<input id="demo" type="button" value="start"/>
+
+<script>
+  function handler1() {
+    alert('Ajith');
+  };
+
+  function handler2() {
+    alert('Have a nice day!');
+  }
+
+  demo.onclick = () => alert("Hello");
+  demo.addEventListener("click", handler1); 
+  demo.addEventListener("click", handler2); 
+</script>
+</body>
+</html>
+

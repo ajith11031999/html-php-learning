@@ -27,4 +27,4 @@ document.getElementById("demo2").innerHTML = "My name is " + object2.firstName +
 </script>
 
 </body>
-</html
+</html>

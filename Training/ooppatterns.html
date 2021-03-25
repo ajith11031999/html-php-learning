@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Pseudoclassical Inheritance</h2>
+
+<p id="demo"></p>
+
+<script>
+
+function Math(x, y) {
+    this.num1 = x;
+    this.num2 = y;
+}
+Math.prototype.add = function() {
+    return this.num1 + this.num2;
+};
+var p = new Math(3, 4);
+
+document.getElementById("demo").innerHTML = p.add();      
+
+</script>
+
+</body>
+</html>
+

@@ -1,22 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body {
-  background-color: blue;
-}
-
-@media only screen and (max-width: 600px) {
-  body {
-    background-color: red;
-  }
-}
-</style>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<p>Resize the browser window. When the width of this document is 600 pixels or less, the background-color is "red", otherwise it is "blue".</p>
+<div class="container">
+  <div class="jumbotron">
+    <h1>My First Bootstrap Page</h1>
+    <p>Resize this responsive page to see the effect!</p> 
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>The four main parts of a flower are generally defined by their positions on the receptacle and not by their function.</p>
+      <p> Many flowers lack some parts or parts may be modified into other functions and/or look like what is typically another part</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 2</h3>
+     <p>The four main parts of a flower are generally defined by their positions on the receptacle and not by their function.</p>
+      <p> Many flowers lack some parts or parts may be modified into other functions and/or look like what is typically another part</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 3</h3>    
+      <p>The four main parts of a flower are generally defined by their positions on the receptacle and not by their function.</p>
+      <p> Many flowers lack some parts or parts may be modified into other functions and/or look like what is typically another part</p>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

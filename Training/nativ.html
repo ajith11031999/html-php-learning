@@ -2,9 +2,9 @@
 <html>
 <body>
 
-<h2>JavaScript remove prototype</h2>
+<h2>JavaScript replace prototype</h2>
 
-<p>You can delete object properties with the delete keyword.</p>
+<p>You can replace object properties .</p>
 
 <p id="demo"></p>
 
@@ -12,15 +12,14 @@
 var person = {
   firstname: "Ajith",
   lastname: "Ajith",
-  age: 22,
+  age: 18,
   eyecolor: "brown"
 };
 
-delete person.age;
+ person.age = 22;
 document.getElementById("demo").innerHTML =
 person.firstname + " is " + person.age + " years old.";
 </script>
 
 </body>
 </html>
-

@@ -16,8 +16,8 @@ function Person(first, last, age, eye) {
 
 Person.prototype.nation = "India";
 
-var Ajith = new Person("Ajith", "xavier", 22, "brown");
-document.getElementById("demo").innerHTML = "My name is " + Ajith.firstName +". "+ "I am from  " + Ajith.nation; 
+var object1 = new Person("Ajith", "xavier", 22, "brown");
+document.getElementById("demo").innerHTML = "My name is " + object1.firstName +". "+ "I am from  " + object1.nation; 
 </script>
 
 </body>

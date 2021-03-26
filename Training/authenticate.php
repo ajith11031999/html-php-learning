@@ -1,18 +1,22 @@
+
 <?php
-if (!isset($_SERVER['PHP_AUTH_USER'])) {
-    header('WWW-Authenticate: Basic realm="My Realm"');
-    header('HTTP/1.0 401 Unauthorized');
-    echo 'Text to send if user hits Cancel button';
-    exit;
-} 
-    else {
-    echo "<p>Hello {$_SERVER['PHP_AUTH_USER']}.</p>";
-    echo "<p>You entered {$_SERVER['PHP_AUTH_PW']} as your password.</p>";
-   }
+
+$valid_password = array ("ajith" => "12345");
+$valid_user = array_keys($valid_password);
+
+$user = $_SERVER['PHP_AUTH_USER'];
+$pass = $_SERVER['PHP_AUTH_PW'];
+
+$validated = (in_array($user, $valid_user)) && ($pass == $valid_password[$user]);
+
+if (!$validated) {
+  header('WWW-Authenticate: Basic realm="My Realm"');
+  header('HTTP/1.0 401 Unauthorized');
+  die ("Not authorized");
+}
+
+// If valid user.
+echo "<p>Welcome $user.</p>";
+echo "<p>Congratulation, you are permitted.</p>";
+
 ?>
-<!DOCTYPE html>
-<html>
-<body>
-<p> Hello world!</p>
-</body>
-</html>

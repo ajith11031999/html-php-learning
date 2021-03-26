@@ -1,38 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+#div1, #div2 {
+  float: left;
+  width: 200px;
+  height: 100px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
 </head>
 <body>
 
-<div class="container">
-  <div class="jumbotron">
-    <h1>My First Bootstrap Page</h1>
-    <p>Resize this responsive page to see the effect!</p> 
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>The four main parts of a flower are generally defined by their positions on the receptacle and not by their function.</p>
-      <p> Many flowers lack some parts or parts may be modified into other functions and/or look like what is typically another part</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 2</h3>
-     <p>The four main parts of a flower are generally defined by their positions on the receptacle and not by their function.</p>
-      <p> Many flowers lack some parts or parts may be modified into other functions and/or look like what is typically another part</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 3</h3>    
-      <p>The four main parts of a flower are generally defined by their positions on the receptacle and not by their function.</p>
-      <p> Many flowers lack some parts or parts may be modified into other functions and/or look like what is typically another part</p>
-    </div>
-  </div>
+<h2>Drag and Drop</h2>
+<p>Drag the image back and forth between the two div elements.</p>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+  <img src="/home/ajith/Downloads/land.jpeg" draggable="true" ondragstart="drag(event)" id="drag1" width="200" height="100">
 </div>
+
+<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 
 </body>
 </html>

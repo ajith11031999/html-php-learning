@@ -1,10 +1,8 @@
 <?php
-namespace MyNamespace1;
-
+namespace MyNamespace2;
 function hello() 
     {
-        echo 'Hello world!';
+        echo 'Have a Niceday!';
     }
-    
 
 ?>

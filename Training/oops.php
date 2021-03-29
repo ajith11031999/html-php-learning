@@ -1,24 +1,23 @@
-<?php
-class Iteration
-{
-    public $var1 = 'one';
-    public $var2 = 'two';
-    public $var3 = 'three';
-    protected $protected = 'four';
-    private   $private   = 'five';
+<!DOCTYPE html>
+<html>
+<body>
 
-    function iterate() {
-       echo "Iteration::iterate:"."<br>";
-       foreach ($this as $key => $value) {
-           print "$key => $value"."<br>";
-       }
-    }
+<?php
+class Info{
+  public $name;
+  public $age;
+
+  function __construct($name, $age) {
+    $this->name = $name; 
+    $this->age = $age;
+  }
+  function __destruct() {
+    echo "My name is {$this->name} and I am {$this->age} years old."; 
+  }
 }
 
-$class = new Iteration();
-
-
-
-$class->iterate();
-
+$apple = new Info("Ajith",'22');
 ?>
+ 
+</body>
+</html>

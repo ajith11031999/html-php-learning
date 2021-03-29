@@ -1,105 +1,63 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Display all records from Database</title>
-</head>
+<!DOCTYPE HTML>
+<html>  
 <body>
 
-<table border="2">
-  <tr>
-    <td>lS.No.</td>
-    <td>First Name</td>
-    <td>Last name</td>
-    <td>Email</td>
-    <td>Phno</td>
-    <td>Edit</td>
-  </tr>
+
 <?php
 
-include "config.php";
+// checking for errors
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
 
-abstract class Abstract{
-    abstract public function insert($conn,$firstname,$lastname,$email,$phno);
-    abstract public function emty($firstname, $lastname,$email,$phno);
-    abstract public function edit($conn);
+include "abstract.php";
+$id = $_GET['id'];
+
+ interface Update{
+    public function Fetch($conn,$id);
+    public function Success($conn,$id);
 }
+class Change implements Update {
+  
+  public function Fetch($conn,$id){
+    $qry = mysqli_query($conn,"select firstname,lastname,email,phno from users where id='$id' "); // select query
+    $data = mysqli_fetch_array($qry);             // fetch data
 
-class Store extends Abstract {
+    return array($data['firstname'],$data['lastname'],$data['email'],$data['phno']); 
+  }
+  public function Success($conn,$id){   
 
-    public function insert($conn,$firstname,$lastname,$email,$phno){  
-       echo $firstname;
+      $firstname = $_POST['firstname'];
+      $lastname = $_POST['lastname'];
+      $email = $_POST['email'];
+      $phno = $_POST['phno'];
+      $edit = mysqli_query($conn,"update users set firstname='$firstname',lastname ='$lastname',email = '$email',phno = '$phno' where id='$id'");
+      echo "sucessfully updated";
+  }
+}   
 
-      $sql = "INSERT INTO users (firstname,lastname,email,phno) VALUES ('$firstname', '$lastname', '$email', '$phno')";   
-       echo "inserted successfully into the table<br>";    
+$update = new Change(); 
 
-        if(mysqli_query($conn, $sql)){
-         echo "inserted into the table<br>";
-        }
-    }
-
-    public function emty($firstname, $lastname,$email,$phno){
-    if($firstname == ""){
-      $firstnameErr = "* first name is not entered";
-    }
-    if($lastname == ""){
-      $lastnameErr="* last name is not entered";
-    }
-    if($email == ""){
-      $emailErr="* email is not entered";
-    }
-    if($phno == ""){
-      $phnoErr="* phno  is not entered";
-    }
-    ?> 
-      <h3>kindly enter the details in all fields as required </h3>
-     
-    <?php
-      include "newresample.php";
-    }
-    
- 
-       
-    public function edit($conn){     
-      $records = mysqli_query($conn,"select * from users"); // fetch data from database
-      ?><h3>Displaying all records from Database</h3>
-        <h4>Incase of any change click the edit option</h4>
-      <?php
-      while($data = mysqli_fetch_array($records)){
-      ?>
-         <tr>
-         <td><?php echo $data['id']; ?></td>
-         <td><?php echo $data['firstname']; ?></td>
-         <td><?php echo $data['lastname']; ?></td> 
-         <td><?php echo $data['email']; ?></td> 
-         <td><?php echo $data['phno']; ?></td>
-         <td><a href="interface.php?id=<?php echo $data['id']; ?>">Edit</a></td>   
-         </tr>	
-
-      <?php
-       }
-    }
-}  
+$update->Fetch($conn,$id);
+$detail = $update->Fetch($conn,$id);
 
 
-$obj = new Store();
-if(isset($_POST['submit'])){
- $firstname = $_POST['firstname'];
- $lastname = $_POST['lastname'];
- $email = $_POST['email'];
- $phno = $_POST['phno'];
-   if($firstname == "" or $lastname =="" or $email == "" or $phno ==""){
-     $obj->emty($firstname, $lastname,$email,$phno);
-   }
-   else{
-     $obj->insert($conn,$firstname,$lastname,$email,$phno);
-   }    
-$obj->edit($conn);
+
+
+if(isset($_POST['update'])){ // when click on Update button
+  $update->Success($conn,$id);
 }
 
 
-?> 
+?>
 
-</table>
+<form method="post">
+First name: <input type="text" name="firstname"  value="<?php echo $detail[0] ?>"><br><br>
+Last name: <input type="text" name="lastname"  value="<?php echo $detail[1] ?>"><br><br>
+E-mail: <input type="text" name="email" value="<?php echo $detail[2] ?>"><br><br>
+Phno: <input type="text" name="phno" value="<?php echo $detail[3] ?>"><br><br>
+<input type="submit"  name="update"  value="update">
+</form>
 
 </body>
 </html>

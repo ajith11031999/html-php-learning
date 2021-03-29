@@ -7,7 +7,7 @@ class Info{
   public $name;
   public $age;
   public static $var = "Hello";
-  const CONST = "Good Day!";
+  const CONST = "Good Day!, ";
   function __construct($name, $age) {
     $this->name = $name; 
     $this->age = $age;
@@ -17,19 +17,27 @@ class Info{
     echo "My name is {$this->name} and I am {$this->age} years old."; 
   }
   
-   
-  public function cnst() {
-    echo self::CONST;
-  }
   
   public static function func() {
-        echo self::$var . ",";
+        echo self::$var . ", ";
     }
+  protected function cnst() {
+    echo self::CONST;
+  }  
 }
 
-$obj = new Info("Ajith",'22');
+class Inherit extends Info{
+public function clg() {
+    $this->cnst();
+    echo "World . ";    
+  }
+
+}
+
+$obj = new Inherit("Ajith",'22');
 Info::func();
-$obj->cnst();
+$obj->clg(); 
+
 ?>
  
 </body>

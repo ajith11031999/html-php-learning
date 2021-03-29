@@ -4,16 +4,21 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(-1);
 
-// create a new cURL resource
+function get_data($url) {
 $ch = curl_init();
-
-// set URL and other appropriate options
-curl_setopt($ch, CURLOPT_URL, "https://www.google.com/");
-curl_setopt($ch, CURLOPT_HEADER, 0);
-
-// grab URL and pass it to the browser
-curl_exec($ch);
-
-// close cURL resource, and free up system resources
+$timeout = 5;
+$username = 'ajith';       
+$password = '12345';                      
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");    
+$data = curl_exec($ch);
 curl_close($ch);
+return $data;
+}
+$url = "http://localhost/sample.php";
+$data = get_data($url);
+echo "$data";
+
 ?>

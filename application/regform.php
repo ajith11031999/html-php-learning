@@ -8,8 +8,7 @@
 <body>  
 
 <?php
-$usernameErr = $passwordErr = $emailErr = $phnoErr = $dateErr = "";
-$username = $password = $email = $phno = $date = "";
+
 $tdate = date('Y-m-d'); 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -78,7 +77,7 @@ function test_input($data) {
 include "config.php";
 
 
-echo "<h2>Your Input:</h2>";
+
 echo $username;
 echo "<br>";
 echo $password;

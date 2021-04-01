@@ -51,18 +51,13 @@ function test_input($data) {
 
 <?php
 
-echo "<h2>Your Input:</h2>";
+
 echo $username;
 echo "<br>";
 echo $password;
 echo "<br>";
 
 
-function Edit($conn){     
-      $records = mysqli_query($conn,"select username from users"); // fetch data from database
-      while($data = mysqli_fetch_array($records)){
-      
-      }
       
 ?>
 

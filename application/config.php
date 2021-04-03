@@ -15,7 +15,6 @@ class DatabaseConfig{
  { 
   try{
        if ($conn=mysqli_connect(self::host, $this->user, $this->pass, $this->db)){
-        echo"connected";
         return $conn;
         
        }

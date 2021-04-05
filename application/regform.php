@@ -8,12 +8,12 @@
 <body>  
 
 <?php
-$usernameErr = $passwordErr = $emailErr = $phnoErr = "";
-$username = $password = $email = $phno = ""; 
+$usernameErr = $passwordErr = $phnoErr = "";
+$username = $password = $phno = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["username"]) || !preg_match("/^[a-zA-Z-' ]*$/", $_POST["username"] )) {
-    $usernameErr = "Only letters and white space allowed";
+  if (empty($_POST["username"]) || !preg_match("/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/", $_POST["username"] )) {
+    $usernameErr = "enter a valid username";
   } else {
     $username = test_input($_POST["username"]);
   }
@@ -21,12 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passwordErr = "Entered password is not strong";
   } else {
     $password = test_input($_POST["password"]);
-  }
-  
-  if (empty($_POST["email"])|| !preg_match("/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/", $_POST["email"])) {
-    $emailErr = "please enter valid email id";
-  } else {
-    $email = test_input($_POST["email"]);
   }
    if (empty($_POST["phno"]) || !preg_match("/^[6-9][0-9]{9}$/", $_POST["phno"])) {
     $phnoErr = "please enter a valid phone number";
@@ -46,61 +40,63 @@ function test_input($data) {
 <h1>Registration</h1>
 <h2>Enter the following details</h2>
 <p><span class="error">* required field</span></p>
+
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Username: <input type="text" name="username" value="<?php echo $_POST["username"] ?>">
+  Username: <input type="text" name="username" placeholder="example@gmail.com" value="<?php echo $_POST["username"] ?>">
   <span class="error">* <?php echo $usernameErr;?></span>
   <br><br>
   Password: <input type="text" name="password" value="<?php echo $_POST["password"] ?>">
   <span class="error">* <?php echo $passwordErr;?></span>
   <br><br>
-  E-mail: <input type="text" name="email" value="<?php echo $_POST["email"] ?>">
-  <span class="error">* <?php echo $emailErr;?></span>
-  <br><br>
   Phno: <input type="text" name="phno" value="<?php echo $_POST["phno"] ?>">
   <span class="error">* <?php echo $phnoErr;?></span>
   <br><br>
+  Usertyple:
+  <input type="radio" name="gender" value="female">Female
+  <input type="radio" name="gender" value="male">Male
+  <input type="radio" name="gender" value="other">Other
   <input type="submit" name="submit" value="Submit">  
 </form>
 
 <?php  
 include "config.php";
-
+// checking for errors
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
 if(isset($_POST["submit"])){ 
-    if(!empty($usernameErr or $passwordErr or $emailErr or $phnoErr)){
+    if(!empty($usernameErr or $passwordErr or $phnoErr)){
      echo "Not registered!!";
      return false;
     }
-    $records = mysqli_query($conn,"select phno from users");
+    $records = mysqli_query($conn,"select username from users");
     while($data = mysqli_fetch_array($records)){     
-         if($data['phno'] == $phno){
+         if($data['username'] == $username){
           echo "Not registered!!<br>";
-          echo "phone number already exist"; 
+          echo "username already exist"; 
           return false;
          }
        }  
    
 }
 
-
 echo $username;
 echo "<br>";
 echo $password;
-echo "<br>";
-echo $email;
 echo "<br>";
 echo $phno;
 echo "<br>";
 
 class Register{
-  function Insert($conn,$username,$password,$email,$phno){ 
-    $sql = "INSERT INTO users (username,password,email,phno,created_date) VALUES ('$username', '$password', '$email', '$phno')";   
+  function Insert($conn,$username,$password,$phno){ 
+    $sql = "INSERT INTO users (username,password,phno) VALUES ('$username', '$password', '$phno')";   
     if(mysqli_query($conn, $sql)){
          echo "Inserted into the table<br>";  
     }
   }
 }
 $insert = new Register();
-$insert->Insert($conn,$username,$password,$email,$phno);
+$insert->Insert($conn,$username,$password,$phno);
     
 ?>
 

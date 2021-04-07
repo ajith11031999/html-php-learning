@@ -50,7 +50,8 @@ function test_input($data) {
     <span class="error">* <?php echo $passwordErr;?></span>
     <br> <br>
    
-    <button type="submit">Login</button>
+    <button type="submit" name="submit" value="Submit">Login</button>
+    <p> If new user <a href="regform.php">Register</a></p>
   </div>
   
 </form>
@@ -58,12 +59,7 @@ function test_input($data) {
 
 <?php
 include "config.php";
-if(isset($_POST["submit"])){ 
-    if(!empty($usernameErr or $passwordErr)){
-     echo "Not signed in!!";
-     return false;
-    }  
-}
+
 
 echo $username;
 echo "<br>";
@@ -87,9 +83,16 @@ class Login{
       }
    }
 }
+if(isset($_POST["submit"])){ 
+    if(!empty($usernameErr or $passwordErr)){
+     echo "Invalid login credentials!!";
+     
+     return false;
+    }  
+
 $login = new Login();
 $login->logn($conn,$password,$username);
-      
+}      
 ?>
 
 </body>

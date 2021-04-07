@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>  
 <html>
 <head>
-<style>
-.error {color: red;}
-</style>
+<link rel="stylesheet" href="logincss.css">
 </head>
 <body>  
 
@@ -33,19 +31,28 @@ function test_input($data) {
 }
 ?>
 
-<h1>Login</h1>
-<h2>Enter the following details</h2>
-<p><span class="error">* required field</span></p>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Username: <input type="text" name="username" placeholder="example@gmail.com" value="<?php echo $_POST["username"] ?>">
-  <span class="error">* <?php echo $usernameErr;?></span>
-  <br><br>
-  Password: <input type="text" name="password" value="<?php echo $_POST["password"] ?>">
-  <span class="error">* <?php echo $passwordErr;?></span>
-  <br><br>
-  <input type="submit" name="submit" value="Login">
-  <p> If new user <a href="regform.php">Register</a></p>
-    
+<h1>Welcome to Godspeed.com</h1>
+<p>Please fill in this form to sign in.</p>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
+  <div class="imgcontainer">
+    <img src="logo.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <p><span class="error">* required field</span></p> <br>
+    <label for="username"><b>Username</b></label> <br>
+    <input type="text" placeholder="Enter Username" name="username" required>
+    <span class="error">* <?php echo $usernameErr;?></span>
+     <br> <br>
+     
+    <label for="password"><b>Password</b></label> <br>
+    <input type="password" placeholder="Enter Password" name="password" required> 
+    <span class="error">* <?php echo $passwordErr;?></span>
+    <br> <br>
+   
+    <button type="submit">Login</button>
+  </div>
+  
 </form>
 
 
@@ -77,10 +84,6 @@ class Login{
       }
       if($count == 1){
        echo "Login Successfull";
-      }
-      else{
-       echo "Invalid login credentials";
-
       }
    }
 }

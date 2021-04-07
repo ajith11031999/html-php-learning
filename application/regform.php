@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>  
 <html>
 <head>
-<style>
-.error {color: red;}
-</style>
+<link rel="stylesheet" href="regcss.css">
 </head>
 <body>  
 
@@ -26,7 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phnoErr = "please enter a valid phone number";
   } else {
     $phno = test_input($_POST["phno"]);
-  }   
+  }
+   if($_POST['admin']){
+   $admin = test_input($_POST["admin"]);} 
+   else { $admin = 'Not an admin';}  
 }
 
 function test_input($data) {
@@ -37,25 +38,37 @@ function test_input($data) {
 }
 ?>
 
-<h1>Registration</h1>
-<h2>Enter the following details</h2>
-<p><span class="error">* required field</span></p>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" style="border:1px solid #ccc">  
+  <div class="container">
+    <h1>welcome to Godspeed.com</h1>
+    <h1>Sign Up</h1>
+    <p>Please fill in this form to create an account.</p>
+    <p><span class="error">* required field</span></p>
+    <hr>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Username: <input type="text" name="username" placeholder="example@gmail.com" value="<?php echo $_POST["username"] ?>">
-  <span class="error">* <?php echo $usernameErr;?></span>
-  <br><br>
-  Password: <input type="text" name="password" value="<?php echo $_POST["password"] ?>">
-  <span class="error">* <?php echo $passwordErr;?></span>
-  <br><br>
-  Phno: <input type="text" name="phno" value="<?php echo $_POST["phno"] ?>">
-  <span class="error">* <?php echo $phnoErr;?></span>
-  <br><br>
-  Usertyple:
-  <input type="radio" name="gender" value="female">Female
-  <input type="radio" name="gender" value="male">Male
-  <input type="radio" name="gender" value="other">Other
-  <input type="submit" name="submit" value="Submit">  
+    <label for="username"><b>Username</b></label><br>
+    <input type="text"  name="username" placeholder="example@gmail.com" value="<?php echo $_POST["username"] ?>" required>
+    <span class="error">* <?php echo $usernameErr;?></span>
+    <br><br>
+
+    <label for="password"><b>Password</b></label><br>
+    <input type="password" placeholder="Enter Password" name="password" value="<?php echo $_POST["password"] ?>" required>
+    <span class="error">* <?php echo $passwordErr;?></span>
+    <br><br>
+    
+     <label for="phno"><b>Phno</b></label><br>
+    <input type="text" placeholder="Enter Phone number" name="phno" value="<?php echo $_POST["phno"] ?>" required>
+    <span class="error">* <?php echo $phnoErr;?></span>
+    <br><br>
+    
+   
+    <label for="admin"> Register as admin</label><br>
+    <input type='checkbox' name='admin' value='admin'>
+   
+    <div class="clearfix">
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
 </form>
 
 <?php  
@@ -86,17 +99,18 @@ echo $password;
 echo "<br>";
 echo $phno;
 echo "<br>";
-
+echo $admin;
+echo "<br>";
 class Register{
-  function Insert($conn,$username,$password,$phno){ 
-    $sql = "INSERT INTO users (username,password,phno) VALUES ('$username', '$password', '$phno')";   
+  function Insert($conn,$admin,$username,$password,$phno){ 
+    $sql = "INSERT INTO users (admin,username,password,phno) VALUES ('$admin','$username', '$password', '$phno')";   
     if(mysqli_query($conn, $sql)){
          echo "Inserted into the table<br>";  
     }
   }
 }
 $insert = new Register();
-$insert->Insert($conn,$username,$password,$phno);
+$insert->Insert($conn,$admin,$username,$password,$phno);
     
 ?>
 

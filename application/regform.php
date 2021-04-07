@@ -7,7 +7,7 @@
 
 <?php
 $usernameErr = $passwordErr = $phnoErr = "";
-$username = $password = $phno = ""; 
+$username = $password = $phno = $role = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["username"]) || !preg_match("/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/", $_POST["username"] )) {
@@ -25,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $phno = test_input($_POST["phno"]);
   }
-   if($_POST['admin']){
-   $admin = test_input($_POST["admin"]);} 
-   else { $admin = 'Not an admin';}  
+   if($_POST['role']){
+   $role = test_input($_POST["role"]);} 
+     
 }
 
 function test_input($data) {
@@ -62,11 +62,17 @@ function test_input($data) {
     <br><br>
     
    
-    <label for="admin"> Register as admin</label><br>
-    <input type='checkbox' name='admin' value='admin'>
+    <label for="role">Type of user:</label>
+   <select name="role" id="role">
+    <option value="anonymous user">anonymous user</option>
+    <option value="editor">editor</option>
+    <option value="admin">admin</option>
+
+  </select>
+  <br><br>
    
     <div class="clearfix">
-      <button type="submit" class="signupbtn">Sign Up</button>
+      <button type="submit" class="signupbtn" name="submit" value="Submit">Sign Up</button>
     </div>
   </div>
 </form>
@@ -77,11 +83,43 @@ include "config.php";
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(-1);
+
+  
+
+echo $username;
+echo "<br>";
+echo $password;
+echo "<br>";
+echo $phno;
+echo "<br>";
+echo $role;
+echo "<br>";
+
+class Register{
+  function Insert_user($conn,$username,$password,$phno){ 
+      $sql = "INSERT INTO users (username,password,phno) VALUES ('$username', '$password', '$phno')";   
+      if(mysqli_query($conn, $sql)){
+         echo "Inserted into the table1<br>";  
+    }
+      
+  }
+  function Insert_role($conn,$username,$role){ 
+      $records = mysqli_query($conn,"select id from users where username = '$username'");
+      $data = mysqli_fetch_array($records);
+      $id = $data['id'];
+      echo $id;
+      $sql = "INSERT INTO access (id,username,role) VALUES ('$id','$username','$role')";   
+      if(mysqli_query($conn, $sql)){
+         echo "Inserted into the table2<br>";  
+      }  
+  }
+}
 if(isset($_POST["submit"])){ 
     if(!empty($usernameErr or $passwordErr or $phnoErr)){
      echo "Not registered!!";
      return false;
     }
+    
     $records = mysqli_query($conn,"select username from users");
     while($data = mysqli_fetch_array($records)){     
          if($data['username'] == $username){
@@ -91,29 +129,12 @@ if(isset($_POST["submit"])){
          }
        }  
    
-}
-
-echo $username;
-echo "<br>";
-echo $password;
-echo "<br>";
-echo $phno;
-echo "<br>";
-echo $admin;
-echo "<br>";
-class Register{
-  function Insert($conn,$admin,$username,$password,$phno){ 
-    $sql = "INSERT INTO users (admin,username,password,phno) VALUES ('$admin','$username', '$password', '$phno')";   
-    if(mysqli_query($conn, $sql)){
-         echo "Inserted into the table<br>";  
-    }
-  }
-}
+  
 $insert = new Register();
-$insert->Insert($conn,$admin,$username,$password,$phno);
-    
+$insert->Insert_user($conn,$username,$password,$phno);
+$insert->Insert_role($conn,$username,$role);
+}    
 ?>
 
 </body>
 </html>
-

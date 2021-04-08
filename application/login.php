@@ -1,13 +1,23 @@
 <!DOCTYPE HTML>  
 <html>
 <head>
-<link rel="stylesheet" href="logincss.css">
+	<title>Login Page</title>
+ 
+   
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+   
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" type="text/css" href="logcss.css">
 </head>
 <body>  
 
 <?php
-$usernameErr = $passwordErr = $phnoErr = "";
-$username = $password = $phno =  ""; 
+$usernameErr = $passwordErr ="";
+$username = $password = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["username"]) || preg_match("/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/", $_POST["username"]) == false) {
@@ -31,33 +41,49 @@ function test_input($data) {
 }
 ?>
 
-<h1>Welcome to Godspeed.com</h1>
-<p>Please fill in this form to sign in.</p>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
-  <div class="imgcontainer">
-    <img src="logo.png" alt="Avatar" class="avatar">
-  </div>
-
-  <div class="container">
-    <p><span class="error">* required field</span></p> <br>
-    <label for="username"><b>Username</b></label> <br>
-    <input type="text" placeholder="Enter Username" name="username" required>
-    <span class="error">* <?php echo $usernameErr;?></span>
-     <br> <br>
-     
-    <label for="password"><b>Password</b></label> <br>
-    <input type="password" placeholder="Enter Password" name="password" required> 
-    <span class="error">* <?php echo $passwordErr;?></span>
-    <br> <br>
-   
-    <button type="submit" name="submit" value="Submit">Login</button>
-    <p> If new user <a href="regform.php">Register</a></p>
-  </div>
-  
-</form>
+<div class="container">
+ <h1>welcome to Godspeed.com</h1>
+ <br><br>
+   <div class="d-flex justify-content-center h-100">
+      <div class="card">
+	  <div class="card-header">
+		<h3>Sign In</h3>
+		<p><span class="error" style = "color: white">* required field</span></p>
+	   </div>
+	  <div class="card-body">
+ 	     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		   <div class="input-group form-group">
+			<div class="input-group-prepend">
+		        	<span class="input-group-text"><i class="fas fa-user"></i></span>
+			</div>
+			<input type="text" class="form-control" placeholder="username" name="username" required>
+			<span class="error">* <?php echo $usernameErr;?></span>
+		   </div>
+		   <div class="input-group form-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="fas fa-key"></i></span>
+			</div>
+			<input type="password" class="form-control" placeholder="password" name="password" required>
+			<span class="error">* <?php echo $passwordErr;?></span>
+		   </div>
+					
+		   <div class="form-group">
+			<input type="submit" name = 'submit' value="Login" class="btn float-right login_btn">
+		   </div>
+	     </form>
+	  </div>
+	  <div class="card-footer">
+		<div class="d-flex justify-content-center links">
+			Don't have an account?<a href="regform.php">Sign Up</a>
+		</div>			
+          </div>
+       </div>
+    </div>
+</div>
 
 
 <?php
+ session_start();
 include "config.php";
 
 
@@ -65,8 +91,7 @@ echo $username;
 echo "<br>";
 echo $password;
 echo "<br>";
-echo $phno;
-echo "<br>";
+
 
 class Login{
 
@@ -79,9 +104,21 @@ class Login{
          }
       }
       if($count == 1){
-       echo "Login Successfull";
+       $_SESSION['username'] = $username;
+       $records = mysqli_query($conn,"select role from access where username = '$username'");
+       $data = mysqli_fetch_array($records);
+       $role = $data['role'];
+       if($role == 'admin' or $role == 'editor'){
+         header("location:admin.php");
+       }
+       else{
+         header("location:welcome.php");
+       }
       }
    }
+
+   
+
 }
 if(isset($_POST["submit"])){ 
     if(!empty($usernameErr or $passwordErr)){
@@ -89,6 +126,8 @@ if(isset($_POST["submit"])){
      
      return false;
     }  
+    
+    
 
 $login = new Login();
 $login->logn($conn,$password,$username);

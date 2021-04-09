@@ -1,3 +1,6 @@
+<?php
+   include('session.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +12,11 @@
 </head>
 
 <body>
+
 <div class="container">
 	<div class="row">
 		<h2 class="text-center">Users details</h2>
+		
 	</div>
     
         <div class="row">
@@ -25,16 +30,13 @@
                                <th>Username</th>
                                <th>Password</th>
                                <th>Phno</th>
-                               <th>Date</th>
                                <th>Edit</th>
                                <th>Delete</th>
                           </tr>
                     </thead>
-
+                             
 
 <?php
-
-include "config.php";
 
 class Store  {
      
@@ -47,7 +49,6 @@ class Store  {
          <td><?php echo $data['username']; ?></td>
          <td><?php echo $data['password']; ?></td> 
          <td><?php echo $data['phno']; ?></td> 
-         <td><?php echo $data['modified_date']; ?></td>
          <td><a href="adminform.php?id=<?php echo $data['id']; ?>">Edit</a></td>   
           <td><a href="adminform.php?id=<?php echo $data['id']; ?>">Delete</a></td>   
          </tr>	
@@ -68,6 +69,12 @@ $obj->edit($conn);
                 </table>
             </div>
         </div>
+        
+         <p>
+        <a href="logout.php" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+      </p> 
 </div>
 
 </body>

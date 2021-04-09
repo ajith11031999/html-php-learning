@@ -110,7 +110,7 @@ class Register{
       echo $id;
       $sql = "INSERT INTO access (id,username,role) VALUES ('$id','$username','$role')";   
       if(mysqli_query($conn, $sql)){
-         echo "Inserted into the table2<br>";  
+        header("Location: http://localhost/login.php");  
       }  
   }
 }

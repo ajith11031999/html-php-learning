@@ -5,14 +5,13 @@
 <html>
 <head>
   <title>Admin page </title>
-  <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
-
-
+<link rel="stylesheet" href="bootcss.css">
 
 </head>
-
 <body>
 <script>
 
@@ -20,38 +19,46 @@ function demoDisplay() {
   document.getElementById("container2").style.display = "block";
 }
 </script>
-<div id="block_container">
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            
-            <div id="sidebar" class="well sidebar-nav">
-              
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#">Home</a></li>
-                </ul>
-                <h5><i class="glyphicon glyphicon-user"></i>
-                    <small><b>USERS</b></small>
-                </h5>
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#">List</a></li>
-                    <li><a onclick="demoDisplay()" id="user-manage">Manage users</a></li>
-                </ul>
-                <h5><i class="glyphicon glyphicon-user"></i>
-                    <small><b>Role</b></small>
-                </h5>
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#">List</a></li>
-                    <li><a href="role.php">Manage role</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <!-- Content Here -->
-        </div>
-    </div>
-</div>
-<div id="container2" style="display:none">
+<div class="container-fluid">
+   <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	   <div class="navbar-header">
+	        <div class="navbar-brand">
+                    <h4>Welcome <?php echo $login_session; ?></h4> 
+                </div>	
+	   </div>
+					
+       <ul class="nav navbar-nav navbar-right">
+       <li><a href="logout.php" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+       </ul>
+       </div><!-- /.navbar-collapse -->
+       </div><!-- /.container-fluid -->
+    </nav>  	
+   <div class="container-fluid main-container">
+ 	<div class="col-md-2 sidebar">
+	    <div class="row">
+	     <!-- uncomment code for absolute positioning tweek see top comment in css -->
+		<div class="absolute-wrapper"> </div>  
+		  <!-- Menu -->
+		   <div class="side-menu">
+		      <nav class="navbar navbar-default" role="navigation">
+			 <!-- Main Menu -->
+		           <div class="side-menu-container">
+		               <ul class="nav navbar-nav">
+		               <li class="active"><a href="admin.php"><span class="glyphicon glyphicon-dashboard"></span>Home</a></li>
+				<li><a onclick="demoDisplay()" id="user_manage"><span class="glyphicon glyphicon-plane"></span> Manage User</a></li>
+				<li><a href="role.php"><span class="glyphicon glyphicon-cloud"></span> Manage role</a></li>
+				</ul>
+	      		   </div><!-- /.navbar-collapse -->
+		      </nav>
+		   </div>
+              </div>  		
+	 </div>
+        <div class="col-md-8 content">
+	   <div class="panel panel-default">
+	      <div class="panel-body">
+		<div id="container2" style="display:none">
 	<div class="row">
 		<h2 class="text-center">Users details</h2>
 		
@@ -68,6 +75,7 @@ function demoDisplay() {
                                <th>Username</th>
                                <th>Password</th>
                                <th>Phno</th>
+                               <th>role</th>
                                <th>Edit</th>
                                <th>Delete</th>
                           </tr>
@@ -79,7 +87,7 @@ function demoDisplay() {
 class Store  {
      
     public function edit($conn){     
-      $records = mysqli_query($conn,"select * from users"); // fetch data from database
+      $records = mysqli_query($conn,"SELECT users.id,users.username,users.password, users.phno,role.role_name FROM users ,role WHERE  users.role_id = role.role_id"); // fetch data from database
       while($data = mysqli_fetch_array($records)){
       ?> <tbody>
          <tr>
@@ -87,6 +95,7 @@ class Store  {
          <td><?php echo $data['username']; ?></td>
          <td><?php echo $data['password']; ?></td> 
          <td><?php echo $data['phno']; ?></td> 
+         <td><?php echo $data['role_name']; ?></td>
          <td><a href="adminform.php?id=<?php echo $data['id']; ?>">Edit</a></td>   
           <td><a href="adminform.php?id=<?php echo $data['id']; ?>">Delete</a></td>   
          </tr>	
@@ -108,14 +117,29 @@ $obj->edit($conn);
             </div>
         </div>
         
-         <p>
-        <a href="logout.php" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-log-out"></span> Log out
-        </a>
-      </p> 
+        
 </div>
+	      </div>
+	   </div>
+	</div>
+	<div class="col-md-2 content">
+	  <div class="panel panel-default">
+	     <div class="panel-heading">
+		For Advertisement	
+	     </div>
+	  <div class="panel-body">
+	    <h5>Advertisement Comes here</h5>
+	    <br><br><br><br><br><br><br><br>
+	    <br><br><br><br><br><br><br><br>
+	    <br><br><br><br><br><br><br><br>
+	    <br><br><br><br><br><br><br><br>
+	    <br><br><br><br>
+	  </div>
+	</div>
+     </div>
+   </div>
 </div>
-
-</body>
-    
-<html>    
+					           
+</body>	
+</html>		
+			

@@ -1,26 +1,70 @@
-<!DOCTYPE HTML>
+<?php
+   include('session.php');
+?>
+<!DOCTYPE html>
 <html>
 <head>
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <title>Admin page </title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" href="bootcss.css">
+
 </head>
-  
 <body>
-
-
-<?php
+<div class="container-fluid">
+   <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	   <div class="navbar-header">
+	        <div class="navbar-brand">
+                    <h4>Welcome <?php echo $login_session; ?></h4> 
+                </div>	
+	   </div>
+					
+       <ul class="nav navbar-nav navbar-right">
+       <li><a href="logout.php" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+       </ul>
+       </div><!-- /.navbar-collapse -->
+       </div><!-- /.container-fluid -->
+    </nav>  	
+   <div class="container-fluid main-container">
+ 	<div class="col-md-2 sidebar">
+	    <div class="row">
+	     <!-- uncomment code for absolute positioning tweek see top comment in css -->
+		<div class="absolute-wrapper"> </div>  
+		  <!-- Menu -->
+		   <div class="side-menu">
+		      <nav class="navbar navbar-default" role="navigation">
+			 <!-- Main Menu -->
+		           <div class="side-menu-container">
+		               <ul class="nav navbar-nav">
+		               <li class="active"><a href="admin.php"><span class="glyphicon glyphicon-dashboard"></span>Home</a></li>
+				<li><a href="admin.php"><span class="glyphicon glyphicon-plane"></span> Manage User</a></li>
+				<li><a href="role.php"><span class="glyphicon glyphicon-cloud"></span> Manage role</a></li>
+				</ul>
+	      		   </div><!-- /.navbar-collapse -->
+		      </nav>
+		   </div>
+              </div>  		
+	 </div>
+        <div class="col-md-8 content">
+	   <div class="panel panel-default">
+	      <div class="panel-body">
+		<?php
  
-include "config.php";
+
 $id = $_GET['id'];
+
 $usernameErr = $passwordErr = $phnoErr = "";
-$username = $password = $phno =  "";
+$username = $password = $phno = $role = $role_id = "";
 
 // checking for errors
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(-1);
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (empty($_POST["username"]) || !preg_match("/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/", $_POST["username"] )) {
     $usernameErr = "enter a valid username";
   } else {
@@ -37,20 +81,24 @@ if (empty($_POST["username"]) || !preg_match("/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$
     $phno = $_POST['phno'];
       
   }
-
-
+   if($_POST['role']){
+   $role = $_POST["role"];
+   } 
+}
 class Update {
   
   public function Fetch($conn,$id){
-    $qry = mysqli_query($conn,"select username,password,phno from users where id='$id' "); // select query
+     $qry = mysqli_query($conn,"select username,password,phno from users where id='$id' ");  // select query
     $data = mysqli_fetch_array($qry);             // fetch data
 
     return array($data['username'],$data['password'],$data['phno']);
   }
-  public function Success($conn,$id ,$username ,$password ,$phno){
+  public function Success($conn,$id ,$username ,$password ,$phno ,$role){
+       
+       if($role == 'admin'){ $role_id = 1;} else if($role == 'editor') {$role_id= 2;}else if($role == 'user') {$role_id= 3;}
+       
      
-     
-      $edit = mysqli_query($conn,"update users set username ='$username', password = '$password',phno = '$phno' where id='$id'");
+      $edit = mysqli_query($conn,"update users set username ='$username', password = '$password',phno = '$phno' , role_id = '$role_id' where id='$id'");
       header("Location: http://localhost/admin.php");
   }
 }   
@@ -78,7 +126,7 @@ if(isset($_POST['update'])){ // when click on Update button
          }
        }  
    
-  $update->Success($conn,$id ,$username ,$password ,$phno);
+  $update->Success($conn,$id ,$username ,$password ,$phno,$role);
 }
 if(isset($_POST['delete'])){ 
 mysqli_query($conn,"DELETE FROM test WHERE id=$id");
@@ -89,10 +137,10 @@ header("Location: admin.php");
 
 ?>
 
- <form class="form-horizontal"  method="POST">
+ <form class="form-horizontal" method="POST">
   <fieldset>
     <div id="legend">
-      <legend class="">Edit form</legend>
+      <legend class="">Edit user details</legend>
     </div>
     <div class="control-group">
       <!-- Username -->
@@ -124,7 +172,17 @@ header("Location: admin.php");
         <p class="help-block">Please enter the phone number</p>
       </div>
     </div>
- 
+    <div class="control-group">
+      <!-- Role-->
+      <label class="control-label" for="role">Type of user:</label>
+      <div class="controls">
+        <select name="role" id="role">
+        <option value="anonymous">anonymous user</option>
+        <option value="editor">editor</option>
+        <option value="admin">admin</option>
+        </select>
+      </div>
+    </div>
     <div class="control-group">
       <!-- Button -->
       <div class="controls">
@@ -134,6 +192,15 @@ header("Location: admin.php");
     </div>
   </fieldset>
 </form>
-
-</body>
-</html>
+        
+</div>
+	      </div>
+	   </div>
+	</div>
+	
+   </div>
+</div>
+					           
+</body>	
+</html>		
+			

@@ -6,6 +6,7 @@
 <body>  
 
 <?php
+
 $usernameErr = $passwordErr = $phnoErr = "";
 $username = $password = $phno = $role = ""; 
 
@@ -63,12 +64,15 @@ function test_input($data) {
     
    
     <label for="role">Type of user:</label>
-   <select name="role" id="role">
-    <option value="anonymous user">anonymous user</option>
-    <option value="editor">editor</option>
-    <option value="admin">admin</option>
-
-  </select>
+     <?php
+     include "config.php";
+        $result = mysqli_query($conn,"SELECT role_name from role"); // fetch data from database
+        echo "<select name='role_name'>";
+         while ($row = mysqli_fetch_array($result)) {
+         echo "<option value='" . $row['role_name'] ."'>" . $row['role_name'] ."</option>";
+         }
+        echo "</select>";
+        ?>  
   <br><br>
    
     <div class="clearfix">
@@ -78,7 +82,6 @@ function test_input($data) {
 </form>
 
 <?php  
-include "config.php";
 // checking for errors
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);

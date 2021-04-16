@@ -94,11 +94,9 @@ class Update {
     return array($data['username'],$data['password'],$data['phno']);
   }
   public function Success($conn,$id ,$username ,$password ,$phno ,$role){
-       
-       if($role == 'admin'){ $role_id = 1;} else if($role == 'editor') {$role_id= 2;}else if($role == 'user') {$role_id= 3;}
-       
-     
-      $edit = mysqli_query($conn,"update users set username ='$username', password = '$password',phno = '$phno' , role_id = '$role_id' where id='$id'");
+        $records = mysqli_query($conn,"SELECT role_id from role where role_name = '$role' ");
+        $role_id = mysqli_fetch_array($records);
+      $edit = mysqli_query($conn,"update users set username ='$username', password = '$password',phno = '$phno' , role_id = '$role_id[0]' where id='$id'");
       header("Location: http://localhost/admin.php");
   }
 }   
@@ -177,10 +175,14 @@ header("Location: admin.php");
       <label class="control-label" for="role">Type of user:</label>
       <div class="controls">
         <select name="role" id="role">
-        <option value="anonymous">anonymous user</option>
-        <option value="editor">editor</option>
-        <option value="admin">admin</option>
+        <?php
+        $result = mysqli_query($conn,"SELECT role_name from role"); // fetch data from database
+         while ($row = mysqli_fetch_array($result)) {
+         echo "<option value='" . $row['role_name'] ."'>" . $row['role_name'] ."</option>";
+         }
+         ?>
         </select>
+        <br><br>
       </div>
     </div>
     <div class="control-group">

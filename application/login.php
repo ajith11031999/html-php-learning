@@ -3,8 +3,7 @@
 <head>
 	<title>Login Page</title>
  
-   
-	
+  	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
    
@@ -105,15 +104,14 @@ class Login{
       }
       if($count == 1){
        $_SESSION['username'] = $username;
-       $records = mysqli_query($conn,"select role from access where username = '$username'");
+       $records = mysqli_query($conn,"SELECT users.role_id FROM users WHERE  username = '$username' ");
        $data = mysqli_fetch_array($records);
-       $role = $data['role'];
-       if($role == 'admin' or $role == 'editor'){
-         header("location:admin.php");
-       }
-       else{
-         header("location:welcome.php");
-       }
+       $role_id = $data['role_id'];
+       
+       $records = mysqli_query($conn,"SELECT page_name FROM permissions WHERE  role_id = '$role_id' "); 
+       $data = mysqli_fetch_array($records);
+       $page =$data['page_name'];
+       header("location:$page");
       }
    }
 

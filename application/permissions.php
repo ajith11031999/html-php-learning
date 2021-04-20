@@ -6,10 +6,10 @@
 <body>
 <table border="2">
         <tr>
-         <th>Pages</td>
+         <th>Pages</th>
 <?php
 include "config.php";
-
+$admin = $editor = $user = '';
       $records = mysqli_query($conn,"select role_name from role"); // fetch data from database
       while($data = mysqli_fetch_array($records)){
       ?> 
@@ -20,25 +20,32 @@ include "config.php";
        }  ?>
        </tr>
        <?php
-
-      $records = mysqli_query($conn,"select page_name from permissions"); // fetch data from database
+      
+      $records = mysqli_query($conn,"select page_name from permissions where role_id = 1 "); // fetch data from database
       while($data = mysqli_fetch_array($records)){
-      ?>
-         <tr>
-         <td><?php echo $data['page_name']; ?></td> 
-          <td><input type="checkbox" name="admin" ></td>  
-          <td><input type="checkbox" name="editor" ></td>  
-          <td><input type="checkbox" name="user" ></td>  
-          <td><input type="checkbox" name="editor2" ></td>  
+          $page = $data['page_name']; 
           
-         </tr>	
-
-      <?php
+                $record = mysqli_query($conn,"select role_id from permissions where page_name = '$page'  ");
+                while($data = mysqli_fetch_array($record)){
+                    if($data['role_id'] == 1){ $admin = "checked";}
+                    if($data['role_id'] == 2){ $editor = "checked";}
+                    if($data['role_id'] == 3){ $user = "checked";}
+                    
+                }  ?>
+                      
+                <tr>
+                   <td><?php echo $page; ?></td>
+                   <td><input type="checkbox" name="admin"<?php echo $admin; ?>></td>  
+                   <td><input type="checkbox" name="admin" <?php echo $editor; ?>></td>  
+                   <td> <input type="checkbox" name="admin"<?php echo $user; ?>></td>    
+                 </tr>                  
+                           
+             <?php $admin = $editor = $user = '';
        }  
+       
 
 
 ?> 
-
 </table>
 
 </body>

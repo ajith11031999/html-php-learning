@@ -49,6 +49,7 @@ function demoDisplay() {
 		               <li class="active"><a href="admin.php"><span class="glyphicon glyphicon-dashboard"></span>Home</a></li>
 				<li><a href="admin.php"><span class="glyphicon glyphicon-plane"></span> Manage User</a></li>
 				<li><a onclick="demoDisplay()" id="user_manage"><span class="glyphicon glyphicon-cloud"></span> Manage role</a></li>
+				<li><a href="permissions.php"><span class="glyphicon glyphicon-cloud"></span> Manage permission</a></li>
 				</ul>
 	      		   </div><!-- /.navbar-collapse -->
 		      </nav>
@@ -60,7 +61,7 @@ function demoDisplay() {
 	      <div class="panel-body">
 		<div id="container2" style="display:none">
 		<div class="row">
-		<h2 class="text-center">Users details</h2>
+		<h2 class="text-center">Role details</h2>
 		
 	</div>
     

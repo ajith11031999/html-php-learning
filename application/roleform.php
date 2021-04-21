@@ -1,10 +1,7 @@
-<?php
-   include('session.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin page </title>
+  <title>Role form  page </title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -44,6 +41,7 @@
 		               <li class="active"><a href="admin.php"><span class="glyphicon glyphicon-dashboard"></span>Home</a></li>
 				<li><a href="admin.php"><span class="glyphicon glyphicon-plane"></span> Manage User</a></li>
 				<li><a href="role.php"><span class="glyphicon glyphicon-cloud"></span> Manage role</a></li>
+				<li><a href="permissions.php"><span class="glyphicon glyphicon-cloud"></span> Manage permission</a></li>
 				</ul>
 	      		   </div><!-- /.navbar-collapse -->
 		      </nav>
@@ -54,6 +52,7 @@
 	   <div class="panel panel-default">
 	      <div class="panel-body">
                    <?php
+ include"config.php";                  
  $id = $_GET['role_id'];
 $role = $roleErr = "";
 

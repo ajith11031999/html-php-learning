@@ -68,7 +68,7 @@ function demoDisplay() {
         <div class="row">
 		
             <div class="col-md-12">
-                 <form>
+                 <form class="form-horizontal"  method="POST">
                  <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                        <tr>
          <th>Pages</th>
@@ -116,8 +116,12 @@ $admin = $editor = $user = '';
 ?> 
 
 </table>
-<input type="submit" name="submit" Value="Submit"/>
-<form>
+
+ <div class="controls">
+        <button name="submit"  value="submit"class="btn btn-success">Submit</button>
+        
+      </div>
+</form>
 <?php
 if(isset($_POST['submit'])){
     $admin = array();
@@ -125,8 +129,7 @@ if(isset($_POST['submit'])){
      foreach($_POST['admin'] as $selected) {
      $admin[] = $selected;  
      }
-     print_r($admin);
-      echo"<br>";
+   
      }
 
   if($_POST['editor']) {
@@ -136,8 +139,7 @@ if(isset($_POST['submit'])){
        $records = mysqli_query($conn,"INSERT INTO permissions (page_name , role_id) VALUES ('$selected', '2') ");    
       $editor[] = $selected;
       }
-       print_r($editor);
-       echo"<br>";
+       
    }
 
   if(!empty($_POST['user'])) {
@@ -148,13 +150,12 @@ if(isset($_POST['submit'])){
       $records = mysqli_query($conn,"INSERT INTO permissions (page_name , role_id) VALUES ('$selected', '3') ");  
      $user[] = $selected;
       }
-      print_r($user);
-       echo"<br>";
+      
   }
 
 }
 ?>
-                </table>
+              
                 
             </div>
         </div>

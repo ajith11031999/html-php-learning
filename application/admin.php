@@ -123,21 +123,7 @@ $obj->edit($conn);
 	      </div>
 	   </div>
 	</div>
-	<div class="col-md-2 content">
-	  <div class="panel panel-default">
-	     <div class="panel-heading">
-		For Advertisement	
-	     </div>
-	  <div class="panel-body">
-	    <h5>Advertisement Comes here</h5>
-	    <br><br><br><br><br><br><br><br>
-	    <br><br><br><br><br><br><br><br>
-	    <br><br><br><br><br><br><br><br>
-	    <br><br><br><br><br><br><br><br>
-	    <br><br><br><br>
-	  </div>
-	</div>
-     </div>
+	
    </div>
 </div>
 					           
